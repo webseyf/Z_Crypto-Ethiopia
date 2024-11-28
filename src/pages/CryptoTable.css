@@ -1,8 +1,10 @@
 /* CryptoTable.css */
 .crypto-table-section {
-  padding: 3px;
+  padding: 2rem;
   background: linear-gradient(120deg, #f0f8ff, #e6f7ff);
   min-height: 100vh;
+  max-height: 180vh; /* Set max height to 170vh */
+  overflow-y: auto; /* Enable vertical scrolling after reaching 170vh */
 }
 
 .crypto-title {
@@ -93,6 +95,8 @@
 }
 
 @media (max-width: 768px) {
+  .crypto-table-section {
+    padding: 2px;}
   .table-container {
     width: 100%;
     padding: 0; /* Remove padding */
