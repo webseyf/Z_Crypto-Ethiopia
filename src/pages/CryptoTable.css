@@ -1,6 +1,6 @@
 /* CryptoTable.css */
 .crypto-table-section {
-  padding: 2rem;
+  padding: 3px;
   background: linear-gradient(120deg, #f0f8ff, #e6f7ff);
   min-height: 100vh;
 }
@@ -38,15 +38,16 @@
 }
 
 .table-container {
-  overflow-y: auto;
-  max-height: 200vh;
+  margin: 0.5px; /* 0.5px margin on all sides */
+  padding: 0; /* 0 padding */
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .crypto-table {
-  width: 100%;
+  width: 100%; /* Ensure the table spans the full container width */
   border-collapse: collapse;
   text-align: left;
 }
@@ -56,6 +57,9 @@
   padding: 1rem;
   font-size: 1rem;
   border: 1px solid #e4e7eb;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Prevent text from breaking into multiple lines */
+  overflow: hidden;
 }
 
 .crypto-table th {
@@ -81,8 +85,40 @@
   color: #dc3545;
 }
 
-@media (max-width: 768px) {
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 1024px) {
   .search-form input {
+    width: 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-container {
     width: 100%;
+    padding: 0; /* Remove padding */
+    margin: 0.5px; /* 0.5px margin */
+  }
+
+  .crypto-table th, .crypto-table td {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .crypto-table {
+    width: 100%;
+    display: block;
+    overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
+  }
+
+  .crypto-table th {
+    position: sticky;
+    top: 0;
+    background-color: #4b6cb7;
+    z-index: 1;
+  }
+
+  .search-form input {
+    width: 100%; /* Make search bar full width on mobile */
+    padding: 0.8rem;
   }
 }
