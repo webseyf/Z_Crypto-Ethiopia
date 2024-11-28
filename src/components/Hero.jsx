@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Hero.css";
-
+import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <section className="hero-section" id="home">
@@ -11,7 +11,9 @@ const Hero = () => {
           ZCRYPTO. Join us to explore advanced blockchain technology and secure
           transactions tailored for Ethiopia and beyond.
         </p>
-        <button className="hero-button"><a href="/listZcrypto">Discover ZCRYPTO</a></button>
+        <button className="hero-button">
+      <Link to="/listZcrypto">View All Cryptocurrencies</Link>
+    </button>
       </div>
       <div className="hero-image">
         <img

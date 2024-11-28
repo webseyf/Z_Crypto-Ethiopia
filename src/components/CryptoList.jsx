@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./CryptoList.css";
 
 const CryptoList = () => {
@@ -79,13 +80,11 @@ const CryptoList = () => {
             <button className="load-more-button" onClick={loadMore}>
               Load More
             </button>
-          )} <br />
-           <button
-            className="load-more-button"
-            onClick={() => navigate("/listZcrypto")} // Navigate to "/Zcryptolist"
-          >
-            View All Cryptocurrencies
-          </button>
+          )} <br /><br /><br />
+        
+          <Link to="/listZcrypto" className="load-more-button">
+          View All Cryptocurrencies
+        </Link>
         </>
       )}
       </div>
