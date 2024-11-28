@@ -3,15 +3,14 @@ import axios from "axios";
 import "./CryptoList.css";
 
 const CryptoList = () => {
-  const [cryptos, setCryptos] = useState([]); // Holds currently displayed cryptos
-  const [allCryptos, setAllCryptos] = useState([]); // Holds all fetched cryptos
-  const [loading, setLoading] = useState(false); // Loading state for the API
-  const [error, setError] = useState(null); // Error state
+  const [cryptos, setCryptos] = useState([]);
+  const [allCryptos, setAllCryptos] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const INITIAL_COUNT = 6; // Number of cryptos to show initially
-  const LOAD_MORE_COUNT = 4; // Number of cryptos to load on mobile
+  const INITIAL_COUNT = 6;
+  const LOAD_MORE_COUNT = 4;
 
-  // Fetch cryptocurrency data
   useEffect(() => {
     const fetchCryptos = async () => {
       setLoading(true);
@@ -19,8 +18,8 @@ const CryptoList = () => {
         const response = await axios.get(
           "https://api.coinlore.net/api/tickers/?start=0&limit=100"
         );
-        setAllCryptos(response.data.data); // Store all cryptos
-        setCryptos(response.data.data.slice(0, INITIAL_COUNT)); // Display initial set
+        setAllCryptos(response.data.data);
+        setCryptos(response.data.data.slice(0, INITIAL_COUNT));
       } catch (err) {
         setError("Failed to load cryptocurrency data. Please try again later.");
       } finally {
@@ -30,7 +29,6 @@ const CryptoList = () => {
     fetchCryptos();
   }, []);
 
-  // Load more cryptocurrencies
   const loadMore = () => {
     const nextCount = cryptos.length + LOAD_MORE_COUNT;
     setCryptos(allCryptos.slice(0, nextCount));
@@ -38,6 +36,7 @@ const CryptoList = () => {
 
   return (
     <section className="crypto-list-section" id="discover">
+      <div className="yes">
       <h2>Top Cryptocurrencies</h2>
       {loading ? (
         <p className="loading-message">Loading cryptocurrencies...</p>
@@ -78,11 +77,18 @@ const CryptoList = () => {
           </div>
           {cryptos.length < allCryptos.length && (
             <button className="load-more-button" onClick={loadMore}>
-             <a href="/listZcrypto">Load More</a>
+              Load More
             </button>
-          )}
+          )} <br />
+           <button
+            className="load-more-button"
+            onClick={() => navigate("/listZcrypto")} // Navigate to "/Zcryptolist"
+          >
+            View All Cryptocurrencies
+          </button>
         </>
       )}
+      </div>
     </section>
   );
 };

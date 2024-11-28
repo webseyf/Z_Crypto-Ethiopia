@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link as ScrollLink } from "react-scroll"; // Smooth scrolling
 import "../styles/Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -39,56 +41,80 @@ const Navbar = () => {
         {/* Navigation Links */}
         <ul className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
           <li>
-            <ScrollLink
-              to="home"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              className="scroll-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </ScrollLink>
+            {isHomePage ? (
+              <ScrollLink
+                to="home"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+                className="scroll-link"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </ScrollLink>
+            ) : (
+              <NavLink to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+                Home
+              </NavLink>
+            )}
           </li>
           <li>
-            <ScrollLink
-              to="discover"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              className="scroll-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Discover_Z
-            </ScrollLink>
+            {isHomePage ? (
+              <ScrollLink
+                to="discover"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+                className="scroll-link"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Discover_Z
+              </ScrollLink>
+            ) : (
+              <NavLink to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+                Discover_Z
+              </NavLink>
+            )}
           </li>
           <li>
-            <ScrollLink
-              to="earn"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              className="scroll-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Earn
-            </ScrollLink>
+            {isHomePage ? (
+              <ScrollLink
+                to="earn"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+                className="scroll-link"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Earn
+              </ScrollLink>
+            ) : (
+              <NavLink to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+                Earn
+              </NavLink>
+            )}
           </li>
           <li>
-            <ScrollLink
-              to="contact"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              className="scroll-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </ScrollLink>
+            {isHomePage ? (
+              <ScrollLink
+                to="contact"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+                className="scroll-link"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </ScrollLink>
+            ) : (
+              <NavLink to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+                Contact
+              </NavLink>
+            )}
           </li>
         </ul>
       </div>

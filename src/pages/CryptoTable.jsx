@@ -4,43 +4,45 @@ import "./CryptoTable.css";
 const CryptoTable = () => {
   const [cryptos, setCryptos] = useState([]);
   const [filteredCryptos, setFilteredCryptos] = useState([]);
-  const [search, setSearch] = useState({ name: "", symbol: "", price: "" });
+  const [search, setSearch] = useState({
+    name: "",
+    symbol: "",
+    price: "",
+  });
 
-  // Fetch crypto data on component mount
   useEffect(() => {
     const fetchCryptoData = async () => {
-      try {
-        const response = await fetch("https://api.coinlore.net/api/tickers/");
-        const data = await response.json();
-        setCryptos(data.data);
-        setFilteredCryptos(data.data);
-      } catch (error) {
-        console.error("Error fetching crypto data:", error);
-      }
+      const response = await fetch("https://api.coinlore.net/api/tickers/");
+      const data = await response.json();
+      setCryptos(data.data);
+      setFilteredCryptos(data.data);
     };
+
     fetchCryptoData();
   }, []);
 
-  // Update filtered results when search criteria or data changes
   useEffect(() => {
-    const filtered = cryptos.filter((crypto) =>
-      crypto.name.toLowerCase().includes(search.name.toLowerCase()) &&
-      crypto.symbol.toLowerCase().includes(search.symbol.toLowerCase()) &&
-      (search.price === "" || parseFloat(crypto.price_usd) <= parseFloat(search.price))
-    );
+    const filtered = cryptos.filter((crypto) => {
+      return (
+        crypto.name.toLowerCase().includes(search.name.toLowerCase()) &&
+        crypto.symbol.toLowerCase().includes(search.symbol.toLowerCase()) &&
+        (search.price === "" || parseFloat(crypto.price_usd) <= parseFloat(search.price))
+      );
+    });
     setFilteredCryptos(filtered);
   }, [search, cryptos]);
 
-  // Handle search input changes
   const handleSearchChange = (e) => {
     const { name, value } = e.target;
-    setSearch((prev) => ({ ...prev, [name]: value }));
+    setSearch((prevSearch) => ({
+      ...prevSearch,
+      [name]: value,
+    }));
   };
 
   return (
     <section className="crypto-table-section">
-      <h1 className="header">Discover ZCRYPTO: Earn More in Ethiopia!</h1>
-      
+      <h1 className="crypto-title">Discover ZCRYPTO 🌍 | Your Gateway to the Crypto World!</h1>
       <div className="search-form">
         <input
           type="text"
@@ -80,26 +82,20 @@ const CryptoTable = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredCryptos.length > 0 ? (
-              filteredCryptos.map((crypto) => (
-                <tr key={crypto.id}>
-                  <td>{crypto.rank}</td>
-                  <td>{crypto.name}</td>
-                  <td>{crypto.symbol}</td>
-                  <td>${parseFloat(crypto.price_usd).toFixed(2)}</td>
-                  <td>{crypto.percent_change_24h}%</td>
-                  <td>${parseFloat(crypto.market_cap_usd).toLocaleString()}</td>
-                  <td>${parseFloat(crypto.volume24).toLocaleString()}</td>
-                  <td>{parseFloat(crypto.csupply).toLocaleString()}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="8" className="no-data">
-                  No matching results found
+            {filteredCryptos.map((crypto) => (
+              <tr key={crypto.id}>
+                <td>{crypto.rank}</td>
+                <td>{crypto.name}</td>
+                <td>{crypto.symbol}</td>
+                <td>${parseFloat(crypto.price_usd).toFixed(2)}</td>
+                <td className={crypto.percent_change_24h < 0 ? "negative" : "positive"}>
+                  {crypto.percent_change_24h}%
                 </td>
+                <td>${parseFloat(crypto.market_cap_usd).toFixed(2)}</td>
+                <td>${parseFloat(crypto.volume24).toFixed(2)}</td>
+                <td>{parseFloat(crypto.csupply).toLocaleString()}</td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
       </div>
