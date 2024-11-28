@@ -4,46 +4,43 @@ import "./CryptoTable.css";
 const CryptoTable = () => {
   const [cryptos, setCryptos] = useState([]);
   const [filteredCryptos, setFilteredCryptos] = useState([]);
-  const [search, setSearch] = useState({
-    name: "",
-    symbol: "",
-    price: "",
-  });
+  const [search, setSearch] = useState({ name: "", symbol: "", price: "" });
 
+  // Fetch crypto data on component mount
   useEffect(() => {
     const fetchCryptoData = async () => {
-      const response = await fetch("https://api.coinlore.net/api/tickers/");
-      const data = await response.json();
-      setCryptos(data.data);
-      setFilteredCryptos(data.data);
+      try {
+        const response = await fetch("https://api.coinlore.net/api/tickers/");
+        const data = await response.json();
+        setCryptos(data.data);
+        setFilteredCryptos(data.data);
+      } catch (error) {
+        console.error("Error fetching crypto data:", error);
+      }
     };
-
     fetchCryptoData();
   }, []);
 
+  // Update filtered results when search criteria or data changes
   useEffect(() => {
-    // Filter based on the search criteria
-    const filtered = cryptos.filter((crypto) => {
-      return (
-        crypto.name.toLowerCase().includes(search.name.toLowerCase()) &&
-        crypto.symbol.toLowerCase().includes(search.symbol.toLowerCase()) &&
-        (search.price === "" || parseFloat(crypto.price_usd) <= parseFloat(search.price))
-      );
-    });
+    const filtered = cryptos.filter((crypto) =>
+      crypto.name.toLowerCase().includes(search.name.toLowerCase()) &&
+      crypto.symbol.toLowerCase().includes(search.symbol.toLowerCase()) &&
+      (search.price === "" || parseFloat(crypto.price_usd) <= parseFloat(search.price))
+    );
     setFilteredCryptos(filtered);
   }, [search, cryptos]);
 
+  // Handle search input changes
   const handleSearchChange = (e) => {
     const { name, value } = e.target;
-    setSearch((prevSearch) => ({
-      ...prevSearch,
-      [name]: value,
-    }));
+    setSearch((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
     <section className="crypto-table-section">
-      {/* Advanced Search Form */}
+      <h1 className="header">Discover ZCRYPTO: Earn More in Ethiopia!</h1>
+      
       <div className="search-form">
         <input
           type="text"
@@ -68,7 +65,6 @@ const CryptoTable = () => {
         />
       </div>
 
-      {/* Crypto Table */}
       <div className="table-container">
         <table className="crypto-table">
           <thead>
@@ -84,18 +80,26 @@ const CryptoTable = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredCryptos.map((crypto) => (
-              <tr key={crypto.id}>
-                <td>{crypto.rank}</td>
-                <td>{crypto.name}</td>
-                <td>{crypto.symbol}</td>
-                <td>${parseFloat(crypto.price_usd).toFixed(2)}</td>
-                <td>{crypto.percent_change_24h}%</td>
-                <td>${parseFloat(crypto.market_cap_usd).toFixed(2)}</td>
-                <td>${parseFloat(crypto.volume24).toFixed(2)}</td>
-                <td>{parseFloat(crypto.csupply).toLocaleString()}</td>
+            {filteredCryptos.length > 0 ? (
+              filteredCryptos.map((crypto) => (
+                <tr key={crypto.id}>
+                  <td>{crypto.rank}</td>
+                  <td>{crypto.name}</td>
+                  <td>{crypto.symbol}</td>
+                  <td>${parseFloat(crypto.price_usd).toFixed(2)}</td>
+                  <td>{crypto.percent_change_24h}%</td>
+                  <td>${parseFloat(crypto.market_cap_usd).toLocaleString()}</td>
+                  <td>${parseFloat(crypto.volume24).toLocaleString()}</td>
+                  <td>{parseFloat(crypto.csupply).toLocaleString()}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="8" className="no-data">
+                  No matching results found
+                </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

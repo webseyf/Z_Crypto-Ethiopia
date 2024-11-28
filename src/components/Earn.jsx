@@ -3,7 +3,7 @@ import "../styles/Earn.css";
 
 const Earn = () => {
   return (
-    <section className="passive-income-section">
+    <section className="passive-income-section" id="earn">
       <div className="centering">
         <div className="content-container">
           <h2>Earn Passive Income with ZCRYPTO</h2>

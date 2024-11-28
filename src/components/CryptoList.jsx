@@ -37,7 +37,7 @@ const CryptoList = () => {
   };
 
   return (
-    <section className="crypto-list-section">
+    <section className="crypto-list-section" id="discover">
       <h2>Top Cryptocurrencies</h2>
       {loading ? (
         <p className="loading-message">Loading cryptocurrencies...</p>

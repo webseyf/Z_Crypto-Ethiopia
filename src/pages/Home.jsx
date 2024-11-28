@@ -5,14 +5,14 @@ import Earn from "../components/Earn";
 import Contact from "../components/Contact";
 const Home = () => {
   return (
-    <>
+    <div id="home">
       
       <Hero />
       <CryptoList />
       <Earn />
       <Contact/>
    
-    </>
+    </div>
   );
 };
 

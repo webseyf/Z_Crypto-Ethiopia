@@ -3,7 +3,7 @@ import "../styles/Hero.css";
 
 const Hero = () => {
   return (
-    <section className="hero-section">
+    <section className="hero-section" id="home">
       <div className="hero-content">
         <h1>Welcome to Ethio ZCRYPTO</h1>
         <p>
