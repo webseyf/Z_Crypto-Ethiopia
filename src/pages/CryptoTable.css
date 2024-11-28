@@ -1,0 +1,94 @@
+/* Crypto Table Section */
+.crypto-table-section {
+  padding: 2rem;
+  background: #f4f6f9; /* Light background for the page */
+  min-height: 100vh;
+}
+
+.search-form {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: #ffffff; /* White background for the form */
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.search-form input {
+  width: 30%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #d1d5db; /* Light border color */
+  background-color: #f9fafb; /* Slightly off-white background */
+  transition: all 0.3s ease;
+}
+
+.search-form input:focus {
+  outline: none;
+  border-color: #4b6cb7; /* Focus border color matching the header */
+  background-color: #ffffff; /* White background on focus */
+}
+
+/* Crypto Table Container */
+.table-container {
+  overflow-y: auto;
+  max-height: 80vh;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.crypto-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.crypto-table th,
+.crypto-table td {
+  padding: 1rem;
+  border: 1px solid #e4e7eb; /* Slightly darker border color */
+  font-size: 1rem;
+  color: #333; /* Dark text for better readability */
+}
+
+.crypto-table th {
+  background-color: #4b6cb7; /* Main blue color for header */
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 2px solid #d1d5db; /* Lighter border to separate header */
+}
+
+.crypto-table td {
+  background-color: #ffffff; /* White background for table rows */
+}
+
+.crypto-table tr:nth-child(even) td {
+  background-color: #f9f9f9; /* Light grey for alternating rows */
+}
+
+.crypto-table tbody tr:hover {
+  background-color: #f1f5f9; /* Slightly darker background on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .crypto-table th,
+  .crypto-table td {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .search-form {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .search-form input {
+    width: 100%;
+  }
+}

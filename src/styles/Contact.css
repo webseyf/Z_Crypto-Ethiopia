@@ -1,0 +1,189 @@
+/* Section Container */
+.contact-us-section {
+  padding: 3rem;
+  background: linear-gradient(90deg, #182848, #4b6cb7);
+  color: white;
+  box-sizing: border-box;
+}
+
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.contact-info {
+  flex: 1;
+  max-width: 400px;
+}
+
+.contact-info h2 {
+  font-size: 2.4rem;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.info-item i {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  color: #00c896;
+}
+
+.info-item p {
+  font-size: 1.2rem;
+}
+
+.map-container {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.contact-form-container {
+  flex: 1;
+  max-width: 500px;
+  text-align: left;
+}
+
+.contact-form-container h3 {
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.contact-form-container input,
+.contact-form-container textarea {
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 10px;
+  border: 1px solid #00c896;
+  background-color: transparent;
+  color: white;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.contact-form-container input:focus,
+.contact-form-container textarea:focus {
+  outline: none;
+  border-color: #ffffff;
+}
+
+.submit-button {
+  padding: 1rem 2rem;
+  background-color: #00c896;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.submit-button:hover {
+  background-color: #ffffff;
+  color: #00c896;
+  border: 2px solid #00c896;
+}
+
+.submit-button:focus {
+  outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-info,
+  .contact-form-container {
+    max-width: 100%;
+  }
+
+  .map-container {
+    margin-bottom: 2rem;
+  }
+
+  .contact-info h2,
+  .contact-form-container h3 {
+    font-size: 2rem;
+  }
+
+  .info-item p {
+    font-size: 1rem;
+  }
+
+  .contact-form-container input,
+  .contact-form-container textarea {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-info h2 {
+    font-size: 2rem;
+    letter-spacing: 3px;
+    margin: 1rem;
+  }
+
+  .info-item p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .contact-form-container input,
+  .contact-form-container textarea {
+    font-size: 0.9rem;
+  }
+
+  .submit-button {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+/* Map Container */
+.map-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio for larger screens */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  margin-bottom: 2rem; /* Adds some space below the map */
+}
+
+.map-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* On PC, reduce height by 30% */
+@media (min-width: 1024px) {
+  .map-container {
+    padding-bottom: 39.375%; /* 16:9 ratio - 30% decrease in height */
+  }
+}
+
+/* On mobile, reduce height by 20% but keep full width */
+@media (max-width: 768px) {
+  .map-container {
+  width: 100%;
+  padding-bottom: 70%;
+  }
+}
